@@ -26,7 +26,7 @@ print("The last 10 numbers on our list are \(primeNumbers.suffix(10))")
 // 2.- Calcular la suma de los primeros 50 números primos y hacer un print del resultado.
 var sumPrimeNumbers = primeNumbers[0...49]
 var sum = sumPrimeNumbers.reduce(0, +)
-print("La suma de los 50 primeros numeros primos es \(sum)")
+print("The sum of the first 50 prime numbers is \(sum)")
 
 
 
@@ -60,7 +60,6 @@ var position = FooballTeam.Portero
 
 
 // 5.- Crea una clase,con los atributos necesarios, para representar a los miembros que participan en una selección del mundial y un enumerado que los diferencia por tipo, por ejemplo: Jugador, Seleccionador, Médico
-
 class FootballTeamMembers{
     var country: String
     var name: String
@@ -83,20 +82,22 @@ enum RolPosition {
 }
 
 
-// 6.-
+
+// 6.-Crear las clases necesarias, con los atributos mínimos, paraa repsentar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
 
 
 
-// 7.-
+
+// 7.-Crear una clase para representar los partido entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de paritdos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
 
 
 
-// 8.-
+// 8.-Generar de forma aleatoria,dentro de la clase Mundial,un listado de grupos con un máximo de 4 selecciones por grupo,se puede crear una clase nueva Grupo que contenga el nombre del grupo,listado de participantes y listado de partidos. Por ejemplo: Grupo A España,Brasil,Francia,Alemania
 
 
 
-// 9.-
+// 9.-Para añadir aa cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
 
 
 
-// 10.-
+// 10.-Generar los partidos del Mundial en cada grupo y caalcular las dos primeras selecciones de cada grupo y haacer un print con los clasificados.
