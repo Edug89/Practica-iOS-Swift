@@ -83,12 +83,47 @@ enum RolPosition {
 
 
 
-// 6.-Crear las clases necesarias, con los atributos mínimos, paraa repsentar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
+// 6.-Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
+class SoccerWorldCup {
+    var listOfSelections = [String]()
+    
+    init(listOFSelections:QualifiedSelection...){
+        for selection in listOfSelections{
+            self.listOfSelections.append(selection.country)
+        }
+    }
+}
+
+class QualifiedSelection{
+    var continent: String
+    var country: String
+    var players = [Player]()
+    var coach: String
+    
+    init(continent:String,country:String,players:Player...,coach:String) {
+        self.continent = continent
+        self.country = country
+        self.players = players
+        self.coach = coach
+    }
+}
+
+class Player {
+    var name: String
+    var lastname: String
+    
+    init(name:String,lastname:String) {
+        self.name = name
+        self.lastname = lastname
+    }
+}
+
+let seleccionGermany = SoccerWorldCup(listOFSelections: QualifiedSelection(continent: "Europe", country:"Germany", players: Player(name: "Manuel", lastname: "Neuel"), coach: "Hansi Flick"))
+seleccionGermany.listOfSelections
 
 
 
-
-// 7.-Crear una clase para representar los partido entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de paritdos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
+// 7.-Crear una clase para representar los partido entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
 
 
 
