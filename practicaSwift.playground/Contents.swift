@@ -85,20 +85,22 @@ enum RolPosition {
 
 // 6.-Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
 class SoccerWorldCup {
-    var listOfSelections = [QualifiedSelection]()
+    let listOfSelections: [QualifiedSelection]
     
-    init(listOFSelections:QualifiedSelection...){
+    
+    init(listOFSelections: [QualifiedSelection]) {
         self.listOfSelections = listOFSelections
+        
     }
 }
 
 class QualifiedSelection{
-    var continent: String
-    var country: String
-    var players = [Player]()
-    var coach: String
+    let continent: String
+    let country: String
+    let players: [Player]
+    let coach: String
     
-    init(continent:String,country:String,players:Player...,coach:String) {
+    init(continent: String, country: String, players: [Player], coach: String) {
         self.continent = continent
         self.country = country
         self.players = players
@@ -107,28 +109,75 @@ class QualifiedSelection{
 }
 
 class Player {
-    var name: String
-    var lastname: String
+    let name: String
+    let lastname: String
     
-    init(name:String,lastname:String) {
+    init(name: String, lastname: String) {
         self.name = name
         self.lastname = lastname
     }
 }
 
-let spain = SoccerWorldCup(listOFSelections: QualifiedSelection(continent: "Europe", country: "Spain", players: Player(name: "Alvaro", lastname: "Morata"), coach: "Luis Enrique"))
+let selections = [QualifiedSelection(continent: "Europe", country: "Spain", players: [Player(name: "Alvaro", lastname: "Morata"),Player(name: "Jordi", lastname: "Alba")], coach: "Luis Enrique"),
+                  QualifiedSelection(continent: "Europe", country: "France", players: [Player(name: "Karim", lastname: "Benzema"),Player(name: "Ousmane", lastname: "Dembele")], coach: "Blanc"),
+                  QualifiedSelection(continent: "Europe", country: "Germany", players: [Player(name: "Manuel", lastname: "Noyer"),Player(name: "John", lastname: "Bellindam")], coach: "Frinch"),
+                  QualifiedSelection(continent: "South America", country: "Argentina", players: [Player(name: "Lionel", lastname: "Messi"),Player(name: "Di", lastname: "Maria")], coach: "Antonio"),
+                  QualifiedSelection(continent: "Europe", country: "Belgium", players: [Player(name: "Edem", lastname: "Hazard"),Player(name: "Romeu", lastname: "Lukaku")], coach: "Roberto Moreno"),
+                  QualifiedSelection(continent: "Africa", country: "Morroco", players: [Player(name: "Acraft", lastname: "Shulimani"),Player(name: "Adil", lastname: "Bobdam")], coach: "Pert"),
+                  QualifiedSelection(continent: "Europe", country: "Holland", players: [Player(name: "Michael", lastname: "Vandic"),Player(name: "Aser", lastname: "Roben")], coach: "Koeman"),
+                  QualifiedSelection(continent: "South America", country: "Brazil", players: [Player(name: "Vinicus", lastname: "Jr"),Player(name: "Rafiña", lastname: "JR")], coach: "Asier")]
 
 
 
-// 7.-Crear una clase para representar los partidod entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
+var soccerWorldCup = SoccerWorldCup(listOFSelections: selections)
+print(soccerWorldCup.listOfSelections[0].country)
 
 
+// 7.-Crear una clase para representar los partidos entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
+
+class Match {
+    let localTeam: String
+    let visitorTeam: String
+    let result: [Int]
+    
+    init(localTeam: String, visitorTeam: String, result: [Int]) {
+        self.localTeam = localTeam
+        self.visitorTeam = visitorTeam
+        self.result = result
+    }
+}
+
+func matchGenerator() -> String {
+    let match = Match(localTeam: selections[Int.random(in: 0..<8)].country, visitorTeam: selections[Int.random(in: 0..<8)].country, result: [Int.random(in: 0..<6), Int.random(in: 0..<6)])
+    return("\(match.localTeam) \(match.result[0]) - \(match.result[1]) \(match.visitorTeam)")
+}
+
+print(matchGenerator())
 
 // 8.-Generar de forma aleatoria,dentro de la clase Mundial,un listado de grupos con un máximo de 4 selecciones por grupo,se puede crear una clase nueva Grupo que contenga el nombre del grupo,listado de participantes y listado de partidos. Por ejemplo: Grupo A España,Brasil,Francia,Alemania
+/*class Group {
+    let name: String
+    let teams: [String]
+    let matchs: [Match]
+    
+    init(name: String, teams: [String], matchs: [Match]) {
+        self.name = name
+        self.teams = teams
+        self.matchs = matchs
+    }
+}
 
-
-
-// 9.-Para añadir aa cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
+func groupGenerator() -> [String] {
+    let selections = [selections[Int.random(in: 0..<8)].country,
+                     selections[Int.random(in: 0..<8)].country,
+                     selections[Int.random(in: 0..<8)].country,
+                     selections[Int.random(in: 0..<8)].country]
+    return selections
+}
+let group1Teams = groupGenerator()
+let group1 = Group(name: "A", teams: group1Teams, matchs: <#T##[Match]#>)
+*/
+// 9.-Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
 
 
 
