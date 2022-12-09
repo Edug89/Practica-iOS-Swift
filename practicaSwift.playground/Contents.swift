@@ -86,13 +86,32 @@ enum RolPosition {
 // 6.-Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
 class SoccerWorldCup {
     let listOfSelections: [QualifiedSelection]
+    let listOfGroups: [Group]
     
-    
-    init(listOFSelections: [QualifiedSelection]) {
+    init(listOFSelections: [QualifiedSelection], listOfGroups: [Group]) {
         self.listOfSelections = listOFSelections
+        self.listOfGroups = listOfGroups
         
     }
 }
+
+let selections = [QualifiedSelection(continent: "Europe", country: "Spain", players: [Player(name: "Alvaro", lastname: "Morata"),Player(name: "Jordi", lastname: "Alba")], coach: "Luis Enrique"),
+                  QualifiedSelection(continent: "Europe", country: "France", players: [Player(name: "Karim", lastname: "Benzema"),Player(name: "Ousmane", lastname: "Dembele")], coach: "Blanc"),
+                  QualifiedSelection(continent: "Europe", country: "Germany", players: [Player(name: "Manuel", lastname: "Noyer"),Player(name: "John", lastname: "Bellindam")], coach: "Frinch"),
+                  QualifiedSelection(continent: "South America", country: "Argentina", players: [Player(name: "Lionel", lastname: "Messi"),Player(name: "Di", lastname: "Maria")], coach: "Antonio"),
+                  QualifiedSelection(continent: "Europe", country: "Belgium", players: [Player(name: "Edem", lastname: "Hazard"),Player(name: "Romeu", lastname: "Lukaku")], coach: "Roberto Moreno"),
+                  QualifiedSelection(continent: "Africa", country: "Morroco", players: [Player(name: "Acraft", lastname: "Shulimani"),Player(name: "Adil", lastname: "Bobdam")], coach: "Pert"),
+                  QualifiedSelection(continent: "Europe", country: "Holland", players: [Player(name: "Michael", lastname: "Vandic"),Player(name: "Aser", lastname: "Roben")], coach: "Koeman"),
+                  QualifiedSelection(continent: "South America", country: "Brazil", players: [Player(name: "Vinicus", lastname: "Jr"),Player(name: "Rafiña", lastname: "JR")], coach: "Asier")]
+
+let teamsGroupB = [selections[4], selections[5], selections[6], selections[7]]
+let teamsGroupA = [selections[0], selections[1], selections[2], selections[3]]
+
+                    
+let groups = [Group(name: "Group A", participants: teamsGroupA, matches: (0..<3).map{_ in matchGenerator(teams: teamsGroupA)}), Group(name: "Group B", participants: teamsGroupB, matches: (0..<3).map{_ in matchGenerator(teams: teamsGroupB)})]
+
+//var soccerWorldCup = SoccerWorldCup(listOFSelections: selections, listOfGroups: groups)
+
 
 class QualifiedSelection{
     let continent: String
@@ -118,19 +137,6 @@ class Player {
     }
 }
 
-let selections = [QualifiedSelection(continent: "Europe", country: "Spain", players: [Player(name: "Alvaro", lastname: "Morata"),Player(name: "Jordi", lastname: "Alba")], coach: "Luis Enrique"),
-                  QualifiedSelection(continent: "Europe", country: "France", players: [Player(name: "Karim", lastname: "Benzema"),Player(name: "Ousmane", lastname: "Dembele")], coach: "Blanc"),
-                  QualifiedSelection(continent: "Europe", country: "Germany", players: [Player(name: "Manuel", lastname: "Noyer"),Player(name: "John", lastname: "Bellindam")], coach: "Frinch"),
-                  QualifiedSelection(continent: "South America", country: "Argentina", players: [Player(name: "Lionel", lastname: "Messi"),Player(name: "Di", lastname: "Maria")], coach: "Antonio"),
-                  QualifiedSelection(continent: "Europe", country: "Belgium", players: [Player(name: "Edem", lastname: "Hazard"),Player(name: "Romeu", lastname: "Lukaku")], coach: "Roberto Moreno"),
-                  QualifiedSelection(continent: "Africa", country: "Morroco", players: [Player(name: "Acraft", lastname: "Shulimani"),Player(name: "Adil", lastname: "Bobdam")], coach: "Pert"),
-                  QualifiedSelection(continent: "Europe", country: "Holland", players: [Player(name: "Michael", lastname: "Vandic"),Player(name: "Aser", lastname: "Roben")], coach: "Koeman"),
-                  QualifiedSelection(continent: "South America", country: "Brazil", players: [Player(name: "Vinicus", lastname: "Jr"),Player(name: "Rafiña", lastname: "JR")], coach: "Asier")]
-
-
-
-var soccerWorldCup = SoccerWorldCup(listOFSelections: selections)
-print(soccerWorldCup.listOfSelections[0].country)
 
 
 // 7.-Crear una clase para representar los partidos entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
@@ -138,47 +144,57 @@ print(soccerWorldCup.listOfSelections[0].country)
 class Match {
     let localTeam: String
     let visitorTeam: String
-    let result: [Int]
+    let result: (Int, Int)
     
-    init(localTeam: String, visitorTeam: String, result: [Int]) {
+    init(localTeam: String, visitorTeam: String, result: (Int, Int)) {
         self.localTeam = localTeam
         self.visitorTeam = visitorTeam
         self.result = result
     }
 }
 
-func matchGenerator() -> String {
-    let match = Match(localTeam: selections[Int.random(in: 0..<8)].country, visitorTeam: selections[Int.random(in: 0..<8)].country, result: [Int.random(in: 0..<6), Int.random(in: 0..<6)])
-    return("\(match.localTeam) \(match.result[0]) - \(match.result[1]) \(match.visitorTeam)")
+func matchGenerator(teams:[QualifiedSelection]) -> Match {
+    let match = Match(localTeam: teams[Int.random(in: 0..<4)].country, visitorTeam: teams[Int.random(in: 0..<4)].country, result: (Int.random(in: 0..<6), Int.random(in: 0..<6)))
+    print("\(match.localTeam) \(match.result.0) - \(match.result.1) \(match.visitorTeam)")
+    return match
 }
 
-print(matchGenerator())
 
 // 8.-Generar de forma aleatoria,dentro de la clase Mundial,un listado de grupos con un máximo de 4 selecciones por grupo,se puede crear una clase nueva Grupo que contenga el nombre del grupo,listado de participantes y listado de partidos. Por ejemplo: Grupo A España,Brasil,Francia,Alemania
-/*class Group {
+class Group {
     let name: String
-    let teams: [String]
-    let matchs: [Match]
+    let participants: [QualifiedSelection]
+    let matches: [Match]
     
-    init(name: String, teams: [String], matchs: [Match]) {
+    init(name: String, participants: [QualifiedSelection], matches: [Match]) {
         self.name = name
-        self.teams = teams
-        self.matchs = matchs
+        self.participants = participants
+        self.matches = matches
     }
 }
 
-func groupGenerator() -> [String] {
-    let selections = [selections[Int.random(in: 0..<8)].country,
-                     selections[Int.random(in: 0..<8)].country,
-                     selections[Int.random(in: 0..<8)].country,
-                     selections[Int.random(in: 0..<8)].country]
-    return selections
-}
-let group1Teams = groupGenerator()
-let group1 = Group(name: "A", teams: group1Teams, matchs: <#T##[Match]#>)
-*/
+
 // 9.-Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
+extension Group {
+    func teamScore(team:QualifiedSelection) -> Int {
+        return matches.reduce(0) { score, match in
+            switch(match.localTeam, match.visitorTeam, match.result) {
+            case(let localTeam, _, let result) where localTeam == team.country && result.0 > result.1:
+                return score + 3
+            case(let localTeam, _, let result) where localTeam == team.country && result.0 == result.1:
+                return score + 1
+            case( _, let visitorTeam, let result) where visitorTeam == team.country && result.0 < result.1:
+                return score + 3
+            case( _, let visitorTeam, let result) where visitorTeam == team.country && result.0 == result.1:       return score + 1
+            default:
+                return score
+            }
+        }
+    }
+}
+
+groups[0].teamScore(team: selections[0])
 
 
+// 10.-Generar los partidos del Mundial en cada grupo y calcular las dos primeras selecciones de cada grupo y hacer un print con los clasificados.
 
-// 10.-Generar los partidos del Mundial en cada grupo y caalcular las dos primeras selecciones de cada grupo y haacer un print con los clasificados.
