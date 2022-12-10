@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - PRÁCTICA iOS -
-
 // 1.- Calcular y generar una lista con los 100 primeros números primos y hacer un print de los últimos 10.
 var number = 2
 var primeNumbers: [Int] = []
@@ -22,12 +21,10 @@ print("The first 100 prime numbers are \(primeNumbers)")
 print("The last 10 numbers on our list are \(primeNumbers.suffix(10))")
 
 
-
 // 2.- Calcular la suma de los primeros 50 números primos y hacer un print del resultado.
 var sumPrimeNumbers = primeNumbers[0...49]
 var sum = sumPrimeNumbers.reduce(0, +)
 print("The sum of the first 50 prime numbers is \(sum)")
-
 
 
 // 3.- Dada la siguiente lista, obtener todos los elementos que contengan más de dos vocales:
@@ -38,9 +35,7 @@ let playersWithMoreThanTwoVowels = players.filter { (word) -> Bool in
     let vowelCount = word.unicodeScalars.filter { vowels.contains($0) }.count
     return vowelCount > 2
 }
-
 print(playersWithMoreThanTwoVowels)
-
 
 
 // 4.- Crear un enumerado que permita indicar la posición en el campo de un jugador de fútbol.
@@ -56,7 +51,6 @@ enum FooballTeam {
 }
 //Abajo adjunto ejemplo de selección:
 var position = FooballTeam.Portero
-
 
 
 // 5.- Crea una clase,con los atributos necesarios, para representar a los miembros que participan en una selección del mundial y un enumerado que los diferencia por tipo, por ejemplo: Jugador, Seleccionador, Médico
@@ -82,7 +76,6 @@ enum RolPosition {
 }
 
 
-
 // 6.-Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022,por ejemplo: Una clase que represente el Mundial,necesitaremos que contenga un listado de Selecciones,cada selección tendrá sus atributos, como nombre,país,jugadores,seleccionador,etc.
 class SoccerWorldCup {
     let listOfSelections: [QualifiedSelection]
@@ -91,7 +84,6 @@ class SoccerWorldCup {
     init(listOFSelections: [QualifiedSelection], listOfGroups: [Group]) {
         self.listOfSelections = listOFSelections
         self.listOfGroups = listOfGroups
-        
     }
 }
 
@@ -107,11 +99,7 @@ let selections = [QualifiedSelection(continent: "Europe", country: "Spain", play
 let teamsGroupB = [selections[4], selections[5], selections[6], selections[7]]
 let teamsGroupA = [selections[0], selections[1], selections[2], selections[3]]
 
-                    
 let groups = [Group(name: "Group A", participants: teamsGroupA, matches: (0..<3).map{_ in matchGenerator(teams: teamsGroupA)}), Group(name: "Group B", participants: teamsGroupB, matches: (0..<3).map{_ in matchGenerator(teams: teamsGroupB)})]
-
-//var soccerWorldCup = SoccerWorldCup(listOFSelections: selections, listOfGroups: groups)
-
 
 class QualifiedSelection{
     let continent: String
@@ -138,9 +126,7 @@ class Player {
 }
 
 
-
 // 7.-Crear una clase para representar los partidos entre selecciones deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido España 3 - 1 Brasil
-
 class Match {
     let localTeam: String
     let visitorTeam: String
@@ -192,9 +178,20 @@ extension Group {
         }
     }
 }
-
 groups[0].teamScore(team: selections[0])
 
 
 // 10.-Generar los partidos del Mundial en cada grupo y calcular las dos primeras selecciones de cada grupo y hacer un print con los clasificados.
+groups[0].participants.sorted { selections1, selections2 in
+    groups[0].teamScore(team: selections1) > groups[0].teamScore(team: selections2)
+}.prefix(2)
+
+groups[1].participants.sorted { selections1, selections2 in
+    groups[0].teamScore(team: selections1) > groups[1].teamScore(team: selections2)
+}.prefix(2)
+//Con este código, te indica que dos selecciones han acumulado más puntos en cada grupo. Pero no he conseguido sacar los print, he probado añadiendo variables y demás y nada.
+
+
+// MARK: - NOTA -
+//En los ejercicios 7,8 y 9 he necesitado ayuda de un amigo ya que se me estaba complicando bastante su funcionamiento. Creo que al elegir clases en vez de struck, me lo ha puesto más dificil para enlazar los últimos ejercicios. Aún así, el código conforme está lo he entendido y para próxima vez intentaré utilizar lo más simple de luego enlazar.(Por tiempo ya no lo he hecho)
 
